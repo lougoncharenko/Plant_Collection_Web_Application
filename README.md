@@ -9,6 +9,9 @@
 |       |                                                                                                                                                                                                     |
 
 
+## Starter Code and Recognition
+Click on the [link](https://make-school-courses.github.io/WEB-1.1-Web-Architecture/#/Assignments/04-Databases) for the starter code to this assignment.
+This is a Make School Assignment that provides developers/students with starter code to start working on the project.
 
 ## Getting Started 
 Run the following in your project directory to install dependencies: 
