@@ -96,6 +96,26 @@ def harvest(plant_id):
 
     return redirect(url_for('detail', plant_id=plant_id))
 
+@app.route('/edit/<plant_id>', methods=['GET', 'POST'])
+def edit(plant_id):
+    """Shows the edit page and accepts a POST request with edited data."""
+    if request.method == 'POST':
+        # TODO: Make an `update_one` database call to update the plant with the
+        # given id. Make sure to put the updated fields in the `$set` object.
+
+        
+        return redirect(url_for('detail', plant_id=plant_id))
+    else:
+        # TODO: Make a `find_one` database call to get the plant object with the
+        # passed-in _id.
+        plant_to_show = ''
+
+        context = {
+            'plant': plant_to_show
+        }
+
+        return render_template('edit.html', **context)   
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
