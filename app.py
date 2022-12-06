@@ -50,7 +50,7 @@ def create():
             'date_planted': date
         }
         mongo.db.plants_data.insert_one(new_plant)
-        print(f"this is the id: {new_plant}")
+ 
         return redirect(url_for('detail', plant_id=new_plant['_id']))
 
     else:
@@ -114,7 +114,7 @@ def edit(plant_id):
 
 @app.route('/delete/<plant_id>', methods=['POST'])
 def delete(plant_id):
-    deleted_plant = mongo.db.plants_data.delete_one('_id': ObjectId(plant_id)})
+    deleted_plant = mongo.db.plants_data.delete_one({'_id': ObjectId(plant_id)})
     mongo.db.harvests_data.delete_many({"_id": deleted_plant})
     return redirect(url_for('plants_list'))
 
