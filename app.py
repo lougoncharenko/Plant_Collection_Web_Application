@@ -98,7 +98,7 @@ def edit(plant_id):
             'photo_url': photo,
             'date_planted': date
         }
-        search_param = {plant_id}
+        search_param = {"_id": plant_id}
         change_param = {'$set': {edit_plant}}
         mongo.db.plants_data.update_one(search_param, change_param)
         
@@ -111,6 +111,12 @@ def edit(plant_id):
         }
 
         return render_template('edit.html', **context)   
+
+@app.route('/delete/<plant_id>', methods=['POST'])
+def delete(plant_id):
+    deleted_plant = mongo.db.plants_data.delete_one('_id': ObjectId(plant_id)})
+    mongo.db.harvests_data.delete_many({"_id": deleted_plant})
+    return redirect(url_for('plants_list'))
 
 
 if __name__ == '__main__':
