@@ -100,7 +100,7 @@ def edit(plant_id):
             'photo_url': photo,
             'date_planted': date
         }
-        search_param = {"_id": plant_id}
+        search_param = {"_id": ObjectId(plant_id)}
         change_param = {'$set': {edit_plant}}
         mongo.db.plants_data.update_one(search_param, change_param)
         
