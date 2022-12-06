@@ -52,8 +52,9 @@ def create():
             'photo_url': photo,
             'date_planted': date
         }
-        id = mongo.db.plants_data.insert_one(new_plant)
-        return redirect(url_for('detail', plant_id=id))
+        mongo.db.plants_data.insert_one(new_plant)
+        print(f"this is the id: {new_plant}")
+        return redirect(url_for('detail', plant_id=new_plant['_id']))
 
     else:
         return render_template('create.html')
@@ -61,15 +62,13 @@ def create():
 @app.route('/plant/<plant_id>')
 def detail(plant_id):
     """Display the plant detail page & process data from the harvest form."""
-    # TODO: Replace the following line with a database call to retrieve *one*
-    # plant from the database, whose id matches the id passed in via the URL.
     plant_to_show = mongo.db.plants_data.find_one(plant_id)
 
     # TODO: Use the `find` database operation to find all harvests for the
     # plant's id.
     # HINT: This query should be on the `harvests` collection, not the `plants`
     # collection.
-    harvests = plant_to_show.find()
+    harvests = mongo.db.harvests_data.find({"_id": plant_to_show})
 
     context = {
         'plant' : plant_to_show,
@@ -99,6 +98,7 @@ def harvest(plant_id):
 @app.route('/edit/<plant_id>', methods=['GET', 'POST'])
 def edit(plant_id):
     """Shows the edit page and accepts a POST request with edited data."""
+    if request.method == 'POST': 
         name = request.form['plant_name']
         variety = request.form['variety']
         photo = request.form['photo']
