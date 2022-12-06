@@ -59,7 +59,7 @@ def create():
 @app.route('/plant/<plant_id>')
 def detail(plant_id):
     """Display the plant detail page & process data from the harvest form."""
-    plant_to_show = mongo.db.plants_data.find_one(plant_id)
+    plant_to_show = mongo.db.plants_data.find_one({'_id': ObjectId(plant_id)})
 
     # TODO: Use the `find` database operation to find all harvests for the
     # plant's id.
