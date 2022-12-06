@@ -112,7 +112,7 @@ def edit(plant_id):
 @app.route('/delete/<plant_id>', methods=['POST'])
 def delete(plant_id):
     deleted_plant = mongo.db.plants_data.delete_one({'_id': ObjectId(plant_id)})
-    mongo.db.harvests_data.delete_many({"_id": deleted_plant})
+    mongo.db.harvests_data.delete_many({"plant_id": plant_id})
     return redirect(url_for('plants_list'))
 
 
