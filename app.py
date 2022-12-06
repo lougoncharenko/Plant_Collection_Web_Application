@@ -94,14 +94,9 @@ def edit(plant_id):
         variety = request.form['variety']
         photo = request.form['photo']
         date = request.form['date_planted']
-        edit_plant = {
-            'name': name,
-            'variety': variety,
-            'photo_url': photo,
-            'date_planted': date
-        }
+  
         search_param = {"_id": ObjectId(plant_id)}
-        change_param = {'$set': {edit_plant}}
+        change_param = {'$set': {'name': name,'variety': variety,'photo_url': photo,'date_planted': date}}
         mongo.db.plants_data.update_one(search_param, change_param)
         
         return redirect(url_for('detail', plant_id=plant_id))
