@@ -48,14 +48,16 @@
         #}
         <section id="harvest-history">
             <h3>Harvest History</h3>
-
+            {% for harvest in harvests %}
             <ul>
-                <li>5/15/2020: Harvested 3 tomatoes</li>
-                <li>5/18/2020: Harvested 2 tomatoes</li>
+                <li>{{harvest.date}}: Harvested {{harvest.quantity}}</li>
             </ul>
+
+            {% endfor %}  
+
         </section>
 
-        <form action="/delete/123456" method='POST' id="delete-form" onsubmit="return confirm_delete()">
+        <form action="/delete/{{plant._id}}" method='POST' id="delete-form" onsubmit="return confirm_delete()">
             <input type="submit" class="nav" onclick="delete_modal()" value="Delete Plant">
         </form>
 </main>
