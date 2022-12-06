@@ -60,8 +60,10 @@ def create():
 def detail(plant_id):
     """Display the plant detail page & process data from the harvest form."""
     plant_to_show = mongo.db.plants_data.find_one({'_id': ObjectId(plant_id)})
-    harvests = mongo.db.harvests_data.find({"_id": plant_to_show})
-
+    search = mongo.db.harvests_data.find({"_id": plant_to_show})
+    harvests = []
+    for data in search:
+        harvests.append(data)
     context = {
         'plant' : plant_to_show,
         'harvests': harvests
